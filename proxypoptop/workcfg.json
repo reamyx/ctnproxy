@@ -1,0 +1,13 @@
+{
+  "initdelay": 2,
+  "workstart": "",
+  "workwatch": 15,
+  "workintvl": 2,
+  "firewall": {
+    "icmppermit": "yes"
+  },
+  "proxypoptop": {
+    "lncgrp": "",
+    "etcdnm": ""
+  }
+}

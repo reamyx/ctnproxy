@@ -1,0 +1,11 @@
+{
+  "initdelay": 2,
+  "workstart": "./srvstart.sh",
+  "workwatch": 15,
+  "workintvl": 5,
+  "firewall": { "icmppermit": "yes" },
+  "proxydante3": {
+    "lncgrp": "",
+    "etcdnm": "",
+    "skport": "" }
+}

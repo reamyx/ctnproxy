@@ -1,0 +1,25 @@
+{
+  "initdelay": 3,
+  "workstart": "./proxylinestart.sh",
+  "workwatch": 15,
+  "workintvl": 10,
+  "firewall": {
+    "tcpportpmt": "1080,1723",
+    "udpportpmt": "500,1701,4500,3000:3299",
+    "icmppermit": "yes",
+    "grepermit":  "yes",
+    "esppermit":  ""
+    },
+  "proxyline": {
+    "intaif":   "",
+    "extdif":   "",
+    "lndname":  "",
+    "lndpswd":  "",
+    "lncgrp":   "",
+    "pptpup":   "",
+    "l2tpup":   "",
+    "sk5pup":   "",
+    "sk5port":  "",
+    "l2tppsk":  "",
+    "etcdnm":   "" }
+}
