@@ -20,9 +20,8 @@ docker container run --detach --rm \
 --sysctl "net.ipv4.ip_forward=1" \
 --device /dev/ppp --device /dev/net/tun \
 --volume /etc/localtime:/etc/localtime:ro \
---env "SRVCFG=$SRVCFG" \
 --dns 192.168.15.192 --dns-search local \
-registry.cn-hangzhou.aliyuncs.com/zhixia/imginit:proxyline
+--env "SRVCFG=$SRVCFG" ctnproxy
 docker network connect emvn "$CNM"; done
 
 docker container exec -it vln01 bash
@@ -44,9 +43,8 @@ docker container run --detach --restart always \
 --name proxylog183 --hostname proxylog183 \
 --network imvn --cap-add NET_ADMIN \
 --volume /etc/localtime:/etc/localtime:ro \
---env "SRVNAME=proxylog" --env "SRVCFG=$SRVCFG" \
 --ip 192.168.15.183 --dns 192.168.15.192 --dns-search local \
-registry.cn-hangzhou.aliyuncs.com/zhixia/imginit:proxyline
+--env "SRVNAME=proxylog" --env "SRVCFG=$SRVCFG" ctnproxy
 
 docker container exec -it proxylog183 bash
 
