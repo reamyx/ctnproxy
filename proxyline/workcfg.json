@@ -4,10 +4,10 @@
   "workwatch": 15,
   "workintvl": 10,
   "firewall": {
-    "tcpportpmt": "1080,1723",
-    "udpportpmt": "500,1701,4500,3000:3299",
+    "tcpportpmt": "",
+    "udpportpmt": "",
     "icmppermit": "yes",
-    "grepermit":  "yes",
+    "grepermit":  "",
     "esppermit":  ""
     },
   "proxyline": {
@@ -16,10 +16,9 @@
     "lndname":  "",
     "lndpswd":  "",
     "lncgrp":   "",
-    "pptpup":   "",
-    "l2tpup":   "",
-    "sk5pup":   "",
-    "sk5port":  "",
-    "l2tppsk":  "",
+    "poptopsrvup":    "",
+    "xl2tpdsrvup":    "",
+    "openvpnsrvup":   "",
+    "3proxysrvup":    "",
     "etcdnm":   "" }
 }

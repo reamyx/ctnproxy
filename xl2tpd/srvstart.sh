@@ -7,20 +7,24 @@ AUTHP="./accountck.sh"
 ETCDU="./Etcd.Url"
 
 #历史实例终止
-for I in {1..10}; do pkill "^pptpd$" || break; [ "$I" == 10 ] && exit 1; sleep 0.5; done
+iptables -t filter -D SRVLCH -p udp -m udp --dport 1701 -m conntrack --ctstate NEW -j ACCEPT
+for I in {1..10}; do pkill "^xl2tpd$" || break; [ "$I" == 10 ] && exit 1; sleep 0.5; done
 [ "$1" == "stop" ] && exit 0
 
 #环境变量未能提供配置数据时从配置文件读取
 [ -z "$SRVCFG" ] && SRVCFG="$( jq -scM ".[0]|objects" "./workcfg.json" )"
-echo "$SRVCFG" | jq -r ".proxypoptop|.etcdnm,.lncgrp|strings" > "$ETCDU"
+echo "$SRVCFG" | jq -r ".xl2tpd|.etcdnm,.lncgrp|strings" > "$ETCDU"
 
 #初始化状态数据库
 ./stdb.create.sh
 
-#配置和启动PPTPD服务
+#配置服务端口通行
+iptables -t filter -A SRVLCH -p udp -m udp --dport 1701 -m conntrack --ctstate NEW -j ACCEPT
+
+#配置和启动xl2tpd服务
 echo "\
 lock
-name PPTP
+name L2TP
 nolog
 idle 0
 lcp-echo-failure 5
@@ -37,24 +41,27 @@ nomppe-stateful
 noccp
 noipv6
 noipx
-mtu 1450
-mru 1450
+mtu 1420
+mru 1420
 ms-dns 223.5.5.5
 ms-dns 114.114.114.114
 ip-up-script   $PWD/$VPNUD
 ip-down-script $PWD/$VPNUD
 plugin expandpwd.so
 pwdprovider $PWD/$AUTHP
-" > ./options.pptpd
+" > ./options.xl2tpd
 
 echo "\
-#地址池: 10.97.128.0/23
-remoteip 10.97.128.0-255,10.97.129.0-255
-localip 10.97.255.255
-connections 512
-option $PWD/options.pptpd
-" > ./pptpd.conf
+[global]
+    ipsec saref = yes
+[lns default]
+;   地址池: 10.97.129.0/24
+    ip range = 10.97.129.0-255
+    local ip = 10.97.255.255
+    pass peer = yes
+    pppoptfile = $PWD/options.xl2tpd
+    length bit = yes
+" > ./xl2tpd.conf
+exec xl2tpd -c "./xl2tpd.conf"
 
-exec pptpd -c "./pptpd.conf"
-
-exit 0
+exit 126

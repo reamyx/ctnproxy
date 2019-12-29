@@ -1,0 +1,171 @@
+
+<ca>
+-----BEGIN CERTIFICATE-----
+MIIEoTCCA4mgAwIBAgIJALQRHx6muA1SMA0GCSqGSIb3DQEBCwUAMIGRMQswCQYD
+VQQGEwJDTjEQMA4GA1UECBMHU2hhYW5YaTEOMAwGA1UEBxMFWGknQW4xETAPBgNV
+BAoTCFpoaVhpYUdNMQ0wCwYDVQQLEwR6eGdtMQ8wDQYDVQQDEwZaWEdNQ0ExDzAN
+BgNVBCkTBnpoaXhpYTEcMBoGCSqGSIb3DQEJARYNenhAemhpeGlhLm5ldDAeFw0x
+ODEwMDEwNzE0NTlaFw0yODA5MjgwNzE0NTlaMIGRMQswCQYDVQQGEwJDTjEQMA4G
+A1UECBMHU2hhYW5YaTEOMAwGA1UEBxMFWGknQW4xETAPBgNVBAoTCFpoaVhpYUdN
+MQ0wCwYDVQQLEwR6eGdtMQ8wDQYDVQQDEwZaWEdNQ0ExDzANBgNVBCkTBnpoaXhp
+YTEcMBoGCSqGSIb3DQEJARYNenhAemhpeGlhLm5ldDCCASIwDQYJKoZIhvcNAQEB
+BQADggEPADCCAQoCggEBANHxZDtUEzjADKQOE2QZZsqRXh90pzD5Enffa8OorN/T
+vcZO/0ZIZU87a4ZzdItfRBCbchZTL0NzknzYjAOT2ka8LnMl3iQ4K0eSXAMLMlyf
+B7KGZZ9Niv8obD/7vONi1ltzK5z+/d3ZOybtMx/OVcpDzRIgkglBW4aZLadLylb5
+plAUFR6Jv9DJJCxAHZgh8wKvLt7qeO3vGiBaFxKF88KSBiQ/FGBzscRMjRauyEVg
+8lkns/TOrLjdjCSGvaSxztTb06I4I36VmpmlfB0miqa710c/MuJqz28oufJLw6+f
+PL7AigbeonskmBxuZY19vrLsaMj8byu9vLs5Us6uXP0CAwEAAaOB+TCB9jAdBgNV
+HQ4EFgQUJN1PESc5vZylcMHKr9zwwLrJJDUwgcYGA1UdIwSBvjCBu4AUJN1PESc5
+vZylcMHKr9zwwLrJJDWhgZekgZQwgZExCzAJBgNVBAYTAkNOMRAwDgYDVQQIEwdT
+aGFhblhpMQ4wDAYDVQQHEwVYaSdBbjERMA8GA1UEChMIWmhpWGlhR00xDTALBgNV
+BAsTBHp4Z20xDzANBgNVBAMTBlpYR01DQTEPMA0GA1UEKRMGemhpeGlhMRwwGgYJ
+KoZIhvcNAQkBFg16eEB6aGl4aWEubmV0ggkAtBEfHqa4DVIwDAYDVR0TBAUwAwEB
+/zANBgkqhkiG9w0BAQsFAAOCAQEAO1hSC/Yxyr7d6hRL/3h6AtBDG74w3geULSlT
+d7Voh1hQxHFfEfE7yaUnfPcnFxI5stV0rJYgnOiv/w1dK+k0oJruou/pAyVyzzj8
+dN2elhVdPLQeJrDHzo2y4MO01Vigw3ziyNJRjw5WP7PSOgmhAy+82YgqY+PJBmpU
+2ajbAmNkXaUThiMKeIX38kt5QxdwTXlIzoPxV82iuFgUvr6S9tNyaYtkEe9PXmQs
+Y0/NON459IgrXlvw+e9ynUSEKmU4I/uOtjUtLxkDTa00UQJQgyzLxG+Q90IWeXVa
+j7GERTQdO9W7WbxOySQvdN3pDT+9zmU4tGbKXn99DD4wlUhmNw==
+-----END CERTIFICATE-----
+</ca>
+
+<cert>
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 1 (0x1)
+    Signature Algorithm: sha256WithRSAEncryption
+        Issuer: C=CN, ST=ShaanXi, L=Xi'An, O=ZhiXiaGM, OU=zxgm, CN=ZXGMCA/name=zhixia/emailAddress=zx@zhixia.net
+        Validity
+            Not Before: Oct  1 12:30:06 2018 GMT
+            Not After : Sep 28 12:30:06 2028 GMT
+        Subject: C=CN, ST=ShaanXi, L=Xi'An, O=ZhiXiaGM, OU=zxgm, CN=ovser00/name=zhixia/emailAddress=zx@zhixia.net
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+                Public-Key: (2048 bit)
+                Modulus:
+                    00:95:fa:31:c3:a9:4b:61:b9:1e:48:27:7c:b4:4f:
+                    2a:be:24:90:be:63:13:b5:2b:5c:ec:9e:2b:26:30:
+                    76:8f:0f:4e:03:76:a4:1c:b0:26:c3:a4:21:38:0d:
+                    48:48:d5:d4:7e:fa:7e:d9:75:b2:ae:6f:30:ed:58:
+                    a9:77:ac:ad:96:05:7d:fd:75:ca:d2:46:f3:7a:9a:
+                    88:08:1b:48:fb:11:cc:a7:82:a1:1a:4b:88:43:d5:
+                    1b:f0:fc:ef:76:c4:df:98:27:a7:18:e9:b1:b4:45:
+                    1a:53:d5:df:8e:44:f6:c7:97:53:11:ec:a1:df:86:
+                    34:7c:2e:19:18:de:de:e1:d5:32:cb:86:7d:77:ed:
+                    71:82:f2:d4:24:19:a4:97:8c:94:7b:6a:7e:e7:c1:
+                    4c:65:74:7d:f6:76:08:1a:0e:af:ae:c3:63:52:cb:
+                    73:ec:0a:8e:09:43:da:66:cd:bb:7a:27:c4:fc:d1:
+                    34:4e:25:d5:e0:ba:30:d6:d5:f5:52:1e:af:50:6f:
+                    0d:82:e5:ea:16:7f:5e:39:c3:a2:ce:97:e8:35:cd:
+                    70:e6:12:ef:98:65:20:10:6e:dd:87:d7:9b:18:15:
+                    ef:79:76:d2:82:be:c4:ee:a6:28:80:7d:d5:7a:5b:
+                    96:9b:01:ea:66:02:60:7d:21:af:e1:80:d3:06:bd:
+                    2f:0f
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            Netscape Cert Type: 
+                SSL Server
+            Netscape Comment: 
+                Easy-RSA Generated Server Certificate
+            X509v3 Subject Key Identifier: 
+                F5:57:BF:19:A9:F4:2C:24:20:19:E7:E0:E8:1D:DB:9E:20:85:00:02
+            X509v3 Authority Key Identifier: 
+                keyid:24:DD:4F:11:27:39:BD:9C:A5:70:C1:CA:AF:DC:F0:C0:BA:C9:24:35
+                DirName:/C=CN/ST=ShaanXi/L=Xi'An/O=ZhiXiaGM/OU=zxgm/CN=ZXGMCA/name=zhixia/emailAddress=zx@zhixia.net
+                serial:B4:11:1F:1E:A6:B8:0D:52
+
+            X509v3 Extended Key Usage: 
+                TLS Web Server Authentication
+            X509v3 Key Usage: 
+                Digital Signature, Key Encipherment
+    Signature Algorithm: sha256WithRSAEncryption
+         11:b4:78:d7:fc:cd:39:5b:e2:3f:80:f2:47:d6:d7:54:90:e4:
+         7e:9e:d3:4b:02:63:1e:20:98:88:b4:08:45:83:6b:c3:86:ac:
+         d0:79:61:e5:9a:56:d6:87:83:7f:9f:23:d0:7c:f4:80:91:08:
+         48:94:e4:cb:cc:d6:f2:09:c7:ca:59:cf:0f:f9:f1:58:f7:33:
+         fe:ac:fa:4b:7c:43:e1:b8:52:4a:68:f4:3d:e7:da:e9:6f:81:
+         e1:ee:89:ff:19:a3:93:02:34:12:77:ac:5d:6d:06:7b:5e:1c:
+         53:78:70:a7:48:48:02:a0:2c:15:66:25:97:7d:be:b1:bb:9a:
+         6f:2c:35:7f:96:5b:05:b7:31:0f:f7:91:b3:0d:41:79:6e:43:
+         fd:c5:a3:85:85:20:a1:18:f5:aa:96:41:37:6e:f1:70:0e:54:
+         e6:45:0e:8d:55:8b:dc:0c:5a:3a:44:e1:af:cc:41:c2:ce:ca:
+         27:85:80:f3:26:25:13:8f:b9:07:e5:01:3d:6e:36:0c:91:ab:
+         2b:28:2b:13:5a:a0:f2:69:9d:ea:26:e3:87:e1:af:f2:98:f9:
+         c3:41:10:41:69:b3:ff:3e:98:04:46:b9:16:75:95:4d:79:bf:
+         79:fb:17:a8:0d:27:8c:3c:d8:a0:98:f1:68:6b:15:ed:d0:4b:
+         67:b8:e5:6c
+-----BEGIN CERTIFICATE-----
+MIIFBDCCA+ygAwIBAgIBATANBgkqhkiG9w0BAQsFADCBkTELMAkGA1UEBhMCQ04x
+EDAOBgNVBAgTB1NoYWFuWGkxDjAMBgNVBAcTBVhpJ0FuMREwDwYDVQQKEwhaaGlY
+aWFHTTENMAsGA1UECxMEenhnbTEPMA0GA1UEAxMGWlhHTUNBMQ8wDQYDVQQpEwZ6
+aGl4aWExHDAaBgkqhkiG9w0BCQEWDXp4QHpoaXhpYS5uZXQwHhcNMTgxMDAxMTIz
+MDA2WhcNMjgwOTI4MTIzMDA2WjCBkjELMAkGA1UEBhMCQ04xEDAOBgNVBAgTB1No
+YWFuWGkxDjAMBgNVBAcTBVhpJ0FuMREwDwYDVQQKEwhaaGlYaWFHTTENMAsGA1UE
+CxMEenhnbTEQMA4GA1UEAxMHb3ZzZXIwMDEPMA0GA1UEKRMGemhpeGlhMRwwGgYJ
+KoZIhvcNAQkBFg16eEB6aGl4aWEubmV0MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A
+MIIBCgKCAQEAlfoxw6lLYbkeSCd8tE8qviSQvmMTtStc7J4rJjB2jw9OA3akHLAm
+w6QhOA1ISNXUfvp+2XWyrm8w7Vipd6ytlgV9/XXK0kbzepqICBtI+xHMp4KhGkuI
+Q9Ub8PzvdsTfmCenGOmxtEUaU9XfjkT2x5dTEeyh34Y0fC4ZGN7e4dUyy4Z9d+1x
+gvLUJBmkl4yUe2p+58FMZXR99nYIGg6vrsNjUstz7AqOCUPaZs27eifE/NE0TiXV
+4Low1tX1Uh6vUG8NguXqFn9eOcOizpfoNc1w5hLvmGUgEG7dh9ebGBXveXbSgr7E
+7qYogH3VeluWmwHqZgJgfSGv4YDTBr0vDwIDAQABo4IBYjCCAV4wCQYDVR0TBAIw
+ADARBglghkgBhvhCAQEEBAMCBkAwNAYJYIZIAYb4QgENBCcWJUVhc3ktUlNBIEdl
+bmVyYXRlZCBTZXJ2ZXIgQ2VydGlmaWNhdGUwHQYDVR0OBBYEFPVXvxmp9CwkIBnn
+4Ogd254ghQACMIHGBgNVHSMEgb4wgbuAFCTdTxEnOb2cpXDByq/c8MC6ySQ1oYGX
+pIGUMIGRMQswCQYDVQQGEwJDTjEQMA4GA1UECBMHU2hhYW5YaTEOMAwGA1UEBxMF
+WGknQW4xETAPBgNVBAoTCFpoaVhpYUdNMQ0wCwYDVQQLEwR6eGdtMQ8wDQYDVQQD
+EwZaWEdNQ0ExDzANBgNVBCkTBnpoaXhpYTEcMBoGCSqGSIb3DQEJARYNenhAemhp
+eGlhLm5ldIIJALQRHx6muA1SMBMGA1UdJQQMMAoGCCsGAQUFBwMBMAsGA1UdDwQE
+AwIFoDANBgkqhkiG9w0BAQsFAAOCAQEAEbR41/zNOVviP4DyR9bXVJDkfp7TSwJj
+HiCYiLQIRYNrw4as0Hlh5ZpW1oeDf58j0Hz0gJEISJTky8zW8gnHylnPD/nxWPcz
+/qz6S3xD4bhSSmj0Pefa6W+B4e6J/xmjkwI0EnesXW0Ge14cU3hwp0hIAqAsFWYl
+l32+sbuabyw1f5ZbBbcxD/eRsw1BeW5D/cWjhYUgoRj1qpZBN27xcA5U5kUOjVWL
+3AxaOkThr8xBws7KJ4WA8yYlE4+5B+UBPW42DJGrKygrE1qg8mmd6ibjh+Gv8pj5
+w0EQQWmz/z6YBEa5FnWVTXm/efsXqA0njDzYoJjxaGsV7dBLZ7jlbA==
+-----END CERTIFICATE-----
+</cert>
+
+<key>
+-----BEGIN PRIVATE KEY-----
+MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCV+jHDqUthuR5I
+J3y0Tyq+JJC+YxO1K1zsnismMHaPD04DdqQcsCbDpCE4DUhI1dR++n7ZdbKubzDt
+WKl3rK2WBX39dcrSRvN6mogIG0j7EcyngqEaS4hD1Rvw/O92xN+YJ6cY6bG0RRpT
+1d+ORPbHl1MR7KHfhjR8LhkY3t7h1TLLhn137XGC8tQkGaSXjJR7an7nwUxldH32
+dggaDq+uw2NSy3PsCo4JQ9pmzbt6J8T80TROJdXgujDW1fVSHq9Qbw2C5eoWf145
+w6LOl+g1zXDmEu+YZSAQbt2H15sYFe95dtKCvsTupiiAfdV6W5abAepmAmB9Ia/h
+gNMGvS8PAgMBAAECggEAfVJawR+3AMq6VhrA5r58ffR6Cs0pi6rXdFVawweeGj70
+toot6lb7nWGJ7JeUvmAHt69Dzhy+mWoKXVpICdt+Fa0zMVd7iqiFDf8RCo0aN8oQ
+1CygyCMzk1MBjSceRoWOPUttIrEsr/FKZaGCtBRGjlORs5mjTe+L7fRrPlAFuHiy
+BS0Zove6B4V28MBPFNaKyqFf2V+JGNmr3PbdRo8SQE5F3nVtNcKVap/Ow6f2et11
+VZT3Kw4RIeSZX6sp4RgrhFBZHq5en6F1prIhzPOwO7dKxFNDbQoRTvxPQtoKPEXg
+GZCAqtE46jvAltMeahZCUuAjgSM3vqvi++ZqWxxYOQKBgQDFn9Dym+t3IXsUZyZ/
+bzWIibO5t4nOkgPdl6CtnOIkEK7JfsE6BPyGv+FTvVOQqx9htW8uaQ8A2dqj4mt6
+F0aq9pg0USYylUjoYMM9E8iljL/h9I9e4uRHuuCJZlBlEDKfcTot95s6A6YoeAJj
+Kt/s8GxCxxaYEXzNStfp+idIcwKBgQDCR1rNiySscXK+sdKm9E2bAyK/qMxvK0J+
+R5ZjkxeNX5ibzpLoAq7knkHp4B3DEtDoXMSo/qPTFkhDLEHcRUEN7VchE68FpsmZ
+e2pQbUEVYlTxe6Q5S6qBFxlndviBpHdUiouzM6vW0ZqdxezkCQ0RKdA9qbm8ePWV
+/EH0LCaD9QKBgCL/WGt+fUaNoVRNqB2tPhe9+xwKitcQOKsHbScRv2KPqcR5NBLo
+Syg51teTkbbu9xHApb3cURHfgr6/HDV05cjk/rNVI6SVl2G/sROh60iWEm0beEBf
+gfnJ+HWcruQW6EAgNyNo1A6EEurbxeB1+U3mjeWNiEzJ3AYnGPGQoWBNAoGBAMFg
+pvhq5JEkx1MayxPVnp2KDH97dCm/hIsPlJj+o3XbzppfjwiTCySShgdWRimSxBBV
+roaMF+MXjcwW9GNdJ7jGInDRF+hnMMmt94+ggCTZ4LURHdDOCSQ/KtE6sXbRjtm+
+ofk4mHXV4rHifb4paDFKTnXiR/da6xBkq/1wKNI1AoGAH0trHStjWEuGz26/Xvcg
+mRr9S4JbpN8QPSKaPa7uZ1MXzL5dYiie8exDZ3hAZnbYKx/ErnpN/a8nnNnm3rUs
+2p5FygLcbQPthnIUxKdn4XZkRCqJMltCmOjCmkOPHozhgDjtjhoQg7bdhp/PT9vy
+axad5z4hw5YDSKPjPopmiF0=
+-----END PRIVATE KEY-----
+</key>
+
+<dh>
+-----BEGIN DH PARAMETERS-----
+MIIBCAKCAQEAjPQdQCmnIMPIJ0NZEQB2DXnmDElLye7gVJYAq/8MFjxynxX0B6JP
+wFbPR6EAQCqZD219XyB4kHiUxhsM9S200SFUlTcCQW8rg65L0U/gayBiGQiBssZe
+Jje4fYepS65dA2Zf4r6s1RzzfTYn9ooEuiKwNE/GZsmoALLUmxdE4u60fBwP7kMJ
+SYHtggBPBYFUc7ExMt0g6y9YffYEVlKBTLmQGU6NdPXNRFKXtNy7deQxCgGzGaD3
+TIANc5GN8MTQz0O17GK13gMb6ZLRgxJyxK4pJ0CsLN6zLp3Hei3xIXaMEmHC6YcI
+6lM+ekQHwcM9Hj0vZXolOplJgN7emHZ1YwIBAg==
+-----END DH PARAMETERS-----
+</dh>

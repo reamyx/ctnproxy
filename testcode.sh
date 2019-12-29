@@ -2,16 +2,16 @@
 exit 0
 
 #VLN桥接实例,批量管理,非守护执行
-OPT="stop"; \
-for ID in {01..10}; do CNM="vln$ID"
+OPT=""; \
+for ID in {00..03}; do CNM="vln$ID"
 SRVCFG='{"initdelay":3,
 "workstart":"./proxylinestart.sh",
 "workwatch":15,"workintvl":10,
-"firewall":{"tcpportpmt":"1080,1723",
-"udpportpmt":"500,1701,4500,3000:9999",
+"firewall":{"tcpportpmt":"1080,8080",
+"udpportpmt":"2:65535",
 "icmppermit":"yes","grepermit":"yes","esppermit":""},
-"proxyline":{"intaif":"","extdif":"",
-"etcdnm":"http://etcdser:2379/"}}'; \
+"proxyline":{"intaif":"","extdif":"","etcdnm":"",
+"lndname":"079203711028","lndpswd":"a1234567"}}'; \
 docker stop "$CNM"; docker rm "$CNM"; \
 [ "$OPT" == "stop" ] && continue; \
 docker container run --detach --rm \
@@ -20,7 +20,7 @@ docker container run --detach --rm \
 --sysctl "net.ipv4.ip_forward=1" \
 --device /dev/ppp --device /dev/net/tun \
 --volume /etc/localtime:/etc/localtime:ro \
---dns 192.168.15.192 --dns-search local \
+--dns 114.114.114.114 --dns-search local \
 --env "SRVCFG=$SRVCFG" ctnproxy
 docker network connect emvn "$CNM"; done
 
@@ -53,3 +53,31 @@ docker container exec -it proxylog183 bash
 GRANT ALL PRIVILEGES ON proxylogdb.* TO 'proxyadmin'@'%' IDENTIFIED BY 'proxypw000';
 GRANT ALL PRIVILEGES ON proxylogdb.* TO 'proxyadmin'@'localhost' IDENTIFIED BY 'proxypw000'
 FLUSH PRIVILEGES;
+
+
+cat > 3proxy.start <<EOF
+#!/usr/bin/3proxy
+
+nserver 114.114.114.114
+nserver 8.8.8.8
+nscache 65536
+maxconn 200000
+timeouts 30 30 60 60 180 1800 60 120
+users wyjsq:CL:wyjsq
+
+daemon
+
+auth strong
+allow wyjsq
+
+socks -p1080
+proxy -p8080
+
+flush
+EOF
+
+chmod +x 3proxy.start
+./3proxy.start
+
+
+pppd debug ifname inet0 lock nodetach maxfail 2 lcp-echo-failure 3 lcp-echo-interval 5 noauth refuse-eap nomppe user 079203711028 password a1234567 mtu 1492 mru 1492 ip-up-script /srv/proxyline/./lineupdown.sh ip-down-script /srv/proxyline/./lineupdown.sh usepeerdns ipparam "0AFBCF58D14B94B1 192.168.95.129 079203711028" plugin rp-pppoe.so eth1

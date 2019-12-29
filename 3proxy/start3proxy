@@ -1,0 +1,18 @@
+#!/usr/bin/3proxy
+
+nserver 114.114.114.114
+nserver 8.8.8.8
+nscache 65536
+maxconn 200000
+timeouts 30 30 60 60 180 1800 60 120
+users vtest:CL:2020
+
+daemon
+
+auth strong
+allow abc000
+
+socks -p1080
+proxy -p8081
+
+flush

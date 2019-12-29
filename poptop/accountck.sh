@@ -28,7 +28,7 @@ exec 4>&1; ECHO(){ echo "${@}" >&4; }; exec 3<>"/dev/null"; exec 0<&3;exec 1>&3;
 UNM="$( echo "$1" | jq -rcM ".usercnm|strings" )"
 
 #测试数据
-[ "$UNM" == "vtest" ] && { ECHO "2019"; ECHO "vtest-2019-ok"; exit 0; }
+[ "$UNM" == "vtest" ] && { ECHO "2020"; ECHO "vtest-2020-ok"; exit 0; }
 
 LNNAME="$HOSTNAME"
 CLTDB="./Client.State.db"

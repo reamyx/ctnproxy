@@ -4,7 +4,7 @@
   "workwatch": 15,
   "workintvl": 5,
   "firewall": { "icmppermit": "yes" },
-  "proxyxl2tpd": {
+  "xl2tpd": {
     "lncgrp": "",
     "etcdnm": ""
   }

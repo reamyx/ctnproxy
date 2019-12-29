@@ -2,33 +2,32 @@
 PATH="/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin"; cd "$(dirname "$0")"
 exec 4>&1; ECHO(){ echo "${@}" >&4; }; exec 3<>"/dev/null"; exec 0<&3;exec 1>&3;exec 2>&3
 
-STFL="./Line.Stat"
+#确定线路状态(由IPCP脚本维护),参数缺失放弃状态更新
+# $LNST $INST $LCAD $DLNM $PPPD_PID $IFNAME $IPLOCAL $IPREMOTE $MACREMOTE
+# $UPTIME $CONNECT_TIME $BYTES_SENT $BYTES_RCVD
+STFL="./Line.Stat" PM=( $1 ) IPCP="Y"
+[ -z "${PM[0]}" ] && read -t 1 PM[0] < "$STFL" && PM=( ${PM[0]} ) && IPCP=""
+[[ "${PM[0]}" == =~ ^"Active"|"Inactive"|"Clean"$ ]] || exit 1
+
 LN="$HOSTNAME"
 LOGDT=""
 export SRVCFG=""
 
-PPTPST=""
-L2TPST=""
-SK5PST=""
+#服务组状态,路径,启用指示
+SRVNM=( "poptop" "xl2tpd" "openvpn" "3proxy" )
+SRVEN=() SRVUP=() SRVST=()
+for ID in {0..3}; do SRVEN[$ID]="./Srv.${SRVNM[$ID]}.Enabled"; done
 
-PPTPEN="./Srv.pptp.Enabled"
-L2TPEN="./Srv.l2tp.Enabled"
-SK5PEN="./Srv.sock.Enabled"
-
-#确定线路参数(由IPCP脚本维护),参数缺失放弃状态更新
-# $LNST $INST $LCAD $DLNM $PPPD_PID $IFNAME $IPLOCAL $IPREMOTE $MACREMOTE
-# $UPTIME $CONNECT_TIME $BYTES_SENT $BYTES_RCVD
-PM=( $1 ) IPCP="Y"
-[ -z "${PM[0]}" ] && read -t 1 PM[0] < "$STFL" && PM=( ${PM[0]} ) && IPCP=""
-[[ "${PM[0]}" == "Active" || "${PM[0]}" == "Inactive" ]] || exit 1
+#清理过程完成后直接结束运行
+[[ "${PM[0]}" == "Clean" && "${PM[1]}" == "FromLineStart" ]] && {
+    for ID in {0..3}; do [ -f "$SRVEN[$ID]" ] || continue
+    rm -f "$SRVEN[$ID]"; ../${SRVNM[$ID]}/srvstart.sh "stop"; done; exit 0; }
 
 #读取缓存的线路配置(由启动程序从远程提取)
 ETCDU="./Etcd.Url" ETCDNM="" SRVCFG=""
 { read -t 1 ETCDNM; read -t 1 SRVCFG; } < "$ETCDU"
-PPTPUP="$( echo "$SRVCFG" | jq -r ".pptpup|strings" )"
-L2TPUP="$( echo "$SRVCFG" | jq -r ".l2tpup|strings" )"
-SK5PUP="$( echo "$SRVCFG" | jq -r ".sk5pup|strings" )"
-SKPORT="$( echo "$SRVCFG" | jq -r ".skport|numbers" )"
+for ID in {0..3}; do \
+SRVUP[$ID]="$( echo "$SRVCFG" | jq -r ".${SRVNM[$ID]}srvup|strings" )"; done
 GRP="$( echo "$SRVCFG" | jq -r ".lncgrp|strings" )"
 RNM="$( echo "$SRVCFG" | jq -r ".regname|strings" )"
 
@@ -40,49 +39,29 @@ GRP="${GRP:-Default}" RNM="${RNM:-$GRP}"
     URL="http://ddns.local:1253/namemapv2"; TAGT="${PM[6]}"
     curl --connect-timeout 3 -X "POST" -d "SIMPLEPM;$LN;V4HOST;$TAGT;20" "$URL" &
     curl --connect-timeout 3 -X "POST" -d "SIMPLEPM;$RNM;V4CLUT;$TAGT" "$URL" &
-    #poptop状态测试和重启
-    [[ "$PPTPUP" =~ ^"YES"|"yes"$ ]] && {
-        > "$PPTPEN"
-        ../proxypoptop/PeriodicST-srvstck.sh && {
-            ../proxypoptop/PeriodicMT-stlogpush.sh & } || {
-            SRVCFG="{\"proxypoptop\":{\"etcdnm\":\"$ETCDNM\",\"lncgrp\":\"$GRP\"}}"
-            setsid ../proxypoptop/srvstart.sh; PPTPST="DOWN"; }; }
-    #xl2tpd状态测试和重启
-    [[ "$L2TPUP" =~ ^"YES"|"yes"$ ]] && {
-        > "$L2TPEN"
-        ../proxyxl2tpd/PeriodicST-srvstck.sh && {
-            ../proxyxl2tpd/PeriodicMT-stlogpush.sh & } || {
-            SRVCFG="{\"proxyxl2tpd\":{\"etcdnm\":\"$ETCDNM\",\"lncgrp\":\"$GRP\"}}"
-            setsid ../proxyxl2tpd/srvstart.sh; L2TPST="DOWN"; }; }
-    #dante状态测试和重启
-    [[ "$SK5PUP" =~ ^"YES"|"yes"$ ]] && {
-        > "$SK5PEN"
-        ../proxydante3/PeriodicST-srvstck.sh && {
-            ../proxydante3/PeriodicMT-stlogpush.sh & } || {
-            SRVCFG="{\"proxydante3\":{\"etcdnm\":\"$ETCDNM\",
-            \"lncgrp\":\"$GRP\" ${SKPORT:+,\"skport\": $SKPORT} }}"
-            setsid ../proxydante3/srvstart.sh; SK5PST="DOWN"; }; }
+    #服务状态测试和重启
+    for ID in {0..3}; do
+        [[ "${SRVUP[$ID]}" =~ ^"YES"|"yes"$ ]] || continue; > "${SRVEN[$ID]}"
+        ./PeriodicST-srvstck.sh && { ../${SRVNM[$ID]}/PeriodicMT-stlogpush.sh & continue; }
+        SRVCFG="{\"${SRVNM[$ID]}\":{\"etcdnm\":\"$ETCDNM\",\"lncgrp\":\"$GRP\"}}"
+        setsid "../${SRVNM[$ID]}/srvstart.sh"; SRVST[$ID]="DOWN"; done
     #对重启动服务进行二次状态测试
-    [ -n "$PPTPST$L2TPST$SK5PST" ] && { sleep 2
-        [ -n "$PPTPST" ] && ../proxypoptop/PeriodicST-srvstck.sh && PPTPST=""
-        [ -n "$L2TPST" ] && ../proxyxl2tpd/PeriodicST-srvstck.sh && L2TPST=""
-        [ -n "$SK5PST" ] && ../proxydante3/PeriodicST-srvstck.sh && SK5PST=""; }
+    [ -n "${SRVST[*]}" ] && {
+        sleep 2; for ID in {0..3}; do [ -z "${SRVST[$ID]}" ] && continue
+        ../${SRVNM[$ID]}/PeriodicST-srvstck.sh && SRVST[$ID]=""; done; }
     #服务状态收集,或未启用服务时进行清理操作
-    LOGDT=" "
-    [[ "$PPTPUP" =~ ^"YES"|"yes"$ ]] && LOGDT="$LOGDT, \"pptpst\": \"${PPTPST:-UP}\"" \
-    || { [ -f "$PPTPEN" ] && { rm -f "$PPTPEN"; ../proxypoptop/srvstart.sh "stop" & }; }
-    [[ "$L2TPUP" =~ ^"YES"|"yes"$ ]] && LOGDT="$LOGDT, \"l2tpst\": \"${L2TPST:-UP}\"" \
-    || { [ -f "$L2TPEN" ] && { rm -f "$L2TPEN"; ../proxyxl2tpd/srvstart.sh "stop" & }; }
-    [[ "$SK5PUP" =~ ^"YES"|"yes"$ ]] && LOGDT="$LOGDT, \"sk5pst\": \"${SK5PST:-UP}\"" \
-    || { [ -f "$SK5PEN" ] && { rm -f "$SK5PEN"; ../proxydante3/srvstart.sh "stop" & }; }; }
+    LOGDT=" "; for ID in {0..3}; do
+        [[ "${SRVUP[$ID]}" =~ ^"YES"|"yes"$ ]] && \
+        LOGDT="$LOGDT, \"${SRVNM[$ID]}srvst\": \"${SRVST[$ID]:-UP}\"" && continue
+        [ -f "$SRVEN[$ID]" ] && { rm -f "$SRVEN[$ID]"; ../${SRVNM[$ID]}/srvstart.sh "stop" & }
+        LOGDT="$LOGDT, \"${SRVNM[$ID]}srvst\": \"DISABLED\""; done; }
 
-#线路DOWN: 收集统计数据,关闭代理服务 
+#线路DOWN: 收集统计数据,关闭代理服务
 [[ "${PM[0]}" == "Inactive" && "${#PM[@]}" == 13 ]] && {
     echo "[LINE.DOWN] ${PM[@]} [TO.BE.END]" > "$STFL"
     LOGDT=", \"cntime\": ${PM[10]}, \"upflow\": ${PM[11]}, \"dwflow\": ${PM[12]}"
-    [ -f "$PPTPEN" ] && { rm -f "$PPTPEN"; ../proxypoptop/srvstart.sh "stop" & }
-    [ -f "$L2TPEN" ] && { rm -f "$L2TPEN"; ../proxyxl2tpd/srvstart.sh "stop" & }
-    [ -f "$SK5PEN" ] && { rm -f "$SK5PEN"; ../proxydante3/srvstart.sh "stop" & }; }
+    for ID in {0..3}; do [ -f "$SRVEN[$ID]" ] || continue
+    rm -f "$SRVEN[$ID]"; ../${SRVNM[$ID]}/srvstart.sh "stop" & done; }
 
 [[ -n "$LOGDT" && -n "$ETCDNM" ]] && {
     #构造日志数据
@@ -91,8 +70,7 @@ GRP="${GRP:-Default}" RNM="${RNM:-$GRP}"
              \"lnaddr\": \"${PM[6]}\",  \"gwaddr\": \"${PM[7]}\",
              \"lacmac\": \"${PM[8]}\",  \"lndlnm\": \"${PM[3]}\",
              \"uptime\": \"${PM[9]}\",  \"linenm\": \"$LN\" $LOGDT }"
-    LOGDT="$( echo "$LOGDT" | jq -M "." )"
-    STKEY="$GRP-$LN-${PM[6]}"
+    LOGDT="$( echo "$LOGDT" | jq -M "." )" STKEY="$GRP-$LN-${PM[6]}"
     #线路状态更新,注册出口网关
     [ "${PM[0]}" == "Active"  ] && { [ -z "$IPCP" ] && \
         etcdctl --endpoints "$ETCDNM" update --ttl "20" "/proxylnst/$STKEY" "$LOGDT" || \

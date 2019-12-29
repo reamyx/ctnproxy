@@ -8,14 +8,9 @@ LN="$HOSTNAME"
 LNPRNM="proxyline-$HOSTNAME-pppd"
 IPCPSC="./lineupdown.sh"
 
-#停止附加服务,终止历史实例
-PPTPEN="./Srv.pptp.Enabled"
-L2TPEN="./Srv.l2tp.Enabled"
-SK5PEN="./Srv.sock.Enabled"
-[ -f "$PPTPEN" ] && { rm -f "$PPTPEN"; ../proxypoptop/srvstart.sh "stop" & }
-[ -f "$L2TPEN" ] && { rm -f "$L2TPEN"; ../proxyxl2tpd/srvstart.sh "stop" & }
-[ -f "$SK5PEN" ] && { rm -f "$SK5PEN"; ../proxydante3/srvstart.sh "stop" & }
+#终止历史实例,停止附加服务
 for ID in {1..20}; do pkill -f "$LNPRNM" || break; sleep 0.5; done
+./PeriodicMT-proxy-keeplive.sh "Clean" "FromLineStart"
 [ "$1" == "stop" ] && exit 0
 
 #环境变量未能提供配置数据时从配置文件读取
@@ -41,7 +36,7 @@ INTACIF="${INTACIF:-eth0}"
 EXTDLIF="${EXTDLIF:-eth1}"
 DLPPPIF="inet0"
 INTADDR="$( ip -o addr show "$INTACIF" | awk '$3=="inet"{print $4}' )"
-CLTADDR="10.97.128.0/22"
+CLTADDR="10.97.128.0/21"
 
 #转发放行
 FWRL=( -s "$CLTADDR" -o "$DLPPPIF" -j ACCEPT )
