@@ -7,7 +7,7 @@ exec 4>&1; ECHO(){ echo "${@}" >&4; }; exec 3<>"/dev/null"; exec 0<&3;exec 1>&3;
 # $UPTIME $CONNECT_TIME $BYTES_SENT $BYTES_RCVD
 STFL="./Line.Stat" PM=( $1 ) IPCP="Y"
 [ -z "${PM[0]}" ] && read -t 1 PM[0] < "$STFL" && PM=( ${PM[0]} ) && IPCP=""
-[[ "${PM[0]}" == =~ ^"Active"|"Inactive"|"Clean"$ ]] || exit 1
+[[ "${PM[0]}" =~ ^"Active"|"Inactive"|"Clean"$ ]] || exit 1
 
 LN="$HOSTNAME"
 LOGDT=""
