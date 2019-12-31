@@ -42,7 +42,8 @@ GRP="${GRP:-Default}" RNM="${RNM:-$GRP}"
     #服务状态测试和重启
     for ID in {0..3}; do
         [[ "${SRVUP[$ID]}" =~ ^"YES"|"yes"$ ]] || continue; > "${SRVEN[$ID]}"
-        ./PeriodicST-srvstck.sh && { ../${SRVNM[$ID]}/PeriodicMT-stlogpush.sh & continue; }
+        ../${SRVNM[$ID]}/PeriodicST-srvstck.sh && { 
+            ../${SRVNM[$ID]}/PeriodicMT-stlogpush.sh & continue; }
         SRVCFG="{\"${SRVNM[$ID]}\":{\"etcdnm\":\"$ETCDNM\",\"lncgrp\":\"$GRP\"}}"
         setsid "../${SRVNM[$ID]}/srvstart.sh"; SRVST[$ID]="DOWN"; done
     #对重启动服务进行二次状态测试

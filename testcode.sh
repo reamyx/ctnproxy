@@ -3,18 +3,15 @@ exit 0
 
 #VLN桥接实例,批量管理,非守护执行
 OPT=""; \
-for ID in {00..03}; do CNM="vln$ID"
+for ID in {04..04}; do CNM="vln$ID"
 SRVCFG='{"initdelay":3,
 "workstart":"./proxylinestart.sh",
 "workwatch":15,"workintvl":10,
-"firewall":{"tcpportpmt":"1080,8080",
-"udpportpmt":"2:65535",
-"icmppermit":"yes","grepermit":"yes","esppermit":""},
-"proxyline":{"intaif":"","extdif":"","etcdnm":"",
-"lndname":"079203711028","lndpswd":"a1234567"}}'; \
+"firewall":{"icmppermit":"yes"},
+"proxyline":{"etcdnm":"http://192.168.95.99:2379"}}'; \
 docker stop "$CNM"; docker rm "$CNM"; \
 [ "$OPT" == "stop" ] && continue; \
-docker container run --detach --rm \
+docker container run --detach --restart always \
 --name "$CNM" --hostname "$CNM" \
 --network imvn --cap-add NET_ADMIN \
 --sysctl "net.ipv4.ip_forward=1" \
