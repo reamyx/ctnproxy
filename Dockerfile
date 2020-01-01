@@ -9,7 +9,7 @@ ADD     proxylog        /srv/proxylog/
 ADD     poptop          /srv/poptop/
 ADD     xl2tpd          /srv/xl2tpd/
 ADD     openvpn         /srv/openvpn/
-ADD     3proxy          /srv/3proxy/
+ADD     sk3proxy        /srv/sk3proxy/
 
 WORKDIR /srv/proxyline
 
