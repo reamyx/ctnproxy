@@ -14,7 +14,7 @@ LOGDT=""
 export SRVCFG=""
 
 #服务组状态,路径,启用指示
-SRVNM=( "poptop" "xl2tpd" "openvpn" "3proxy" )
+SRVNM=( "poptop" "xl2tpd" "openvpn" "sk3proxy" )
 SRVEN=() SRVUP=() SRVST=()
 for ID in {0..3}; do SRVEN[$ID]="./Srv.${SRVNM[$ID]}.Enabled"; done
 

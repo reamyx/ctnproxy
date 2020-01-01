@@ -1,3 +1,3 @@
 #!/bin/env sh
 cd "$(dirname "$0")"
-source ../proxypoptop/PeriodicMT-stlogpush.sh
+source ../poptop/PeriodicMT-stlogpush.sh

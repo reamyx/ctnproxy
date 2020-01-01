@@ -68,7 +68,7 @@ tls-server
 " > ./ovser.conf
 cat "ovsercert.txt" >> ./ovser.conf
 
-exec -a "$OVCNM" openvpn --cd "./" --lport "$SRVPORT" --config "ovser.conf"
+exec openvpn --cd "./" --lport "$SRVPORT" --config "ovser.conf"
 
 exit 0
 
