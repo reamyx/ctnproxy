@@ -21,7 +21,7 @@ docker container run --detach --restart always \
 --env "SRVCFG=$SRVCFG" ctnproxy
 docker network connect emvn "$CNM"; done
 
-docker container exec -it vln01 bash
+docker container exec -it vln04 bash
 
 
 for ID in {128..159}; do CNM="vpr$ID"

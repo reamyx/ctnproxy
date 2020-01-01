@@ -22,6 +22,6 @@ iptables -t filter -A SRVLCH -p tcp -m tcp --dport 1080 -m conntrack --ctstate N
 iptables -t filter -A SRVLCH -p tcp -m tcp --dport 8081 -m conntrack --ctstate NEW -j ACCEPT
 
 #启动服务
-exec ./start3proxy
+exec 3proxy ./3proxy.conf
 
 eixt 126
