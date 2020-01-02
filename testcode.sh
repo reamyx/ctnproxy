@@ -3,7 +3,7 @@ exit 0
 
 #VLN桥接实例,批量管理,非守护执行
 OPT=""; \
-for ID in {04..04}; do CNM="vln$ID"
+for ID in {00..09}; do CNM="vln$ID"
 SRVCFG='{"initdelay":3,
 "workstart":"./proxylinestart.sh",
 "workwatch":15,"workintvl":10,

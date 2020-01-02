@@ -39,18 +39,12 @@ group nobody
 persist-key
 persist-tun
 
-cipher AES-128-CBC
-comp-lzo yes
-auth SHA1
-
 verb 0
 script-security 3
 status-version 2
 status ovstatus.ser 10
 
-float
-keepalive 5 22
-max-clients 96
+keepalive 5 22a
 duplicate-cn
 client-config-dir ccd
 verify-client-cert none
@@ -59,8 +53,6 @@ auth-user-pass-verify ovckpwd.sh via-env
 #ccd-exclusive
 script-security 3
 
-push \"cipher AES-128-CBC\"
-push \"comp-lzo yes\"
 push \"dhcp-option DNS 114.114.114.114\"
 push \"redirect-gateway def1\"
 
@@ -68,7 +60,7 @@ tls-server
 " > ./ovser.conf
 cat "ovsercert.txt" >> ./ovser.conf
 
-exec openvpn --cd "./" --lport "$SRVPORT" --config "ovser.conf"
+exec openvpn --cd "./" --daemon --lport "$SRVPORT" --config "ovser.conf"
 
 exit 0
 
