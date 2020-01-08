@@ -6,6 +6,7 @@ ETCDU="./Etcd.Url"
 
 #历史实例终止
 iptables -t filter -D SRVLCH -p tcp -m tcp --dport 1080 -m conntrack --ctstate NEW -j ACCEPT
+iptables -t filter -D SRVLCH -p udp -m conntrack --ctstate NEW -j ACCEPT
 iptables -t filter -D SRVLCH -p tcp -m tcp --dport 8081 -m conntrack --ctstate NEW -j ACCEPT
 for I in {1..10}; do pkill "sk3proxy" || break; [ "$I" == 10 ] && exit 1; sleep 0.5; done
 [ "$1" == "stop" ] && exit 0
@@ -19,6 +20,7 @@ echo "$SRVCFG" | jq -r ".3proxy|.etcdnm,.lncgrp|strings" > "$ETCDU"
 
 #配置服务端口通行
 iptables -t filter -A SRVLCH -p tcp -m tcp --dport 1080 -m conntrack --ctstate NEW -j ACCEPT
+iptables -t filter -A SRVLCH -p udp -m conntrack --ctstate NEW -j ACCEPT
 iptables -t filter -A SRVLCH -p tcp -m tcp --dport 8081 -m conntrack --ctstate NEW -j ACCEPT
 
 #启动服务
